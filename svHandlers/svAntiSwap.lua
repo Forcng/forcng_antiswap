@@ -16,12 +16,14 @@ exports.ox_inventory:registerHook('swapItems', function(data)
     end
 
     if (action == "take" or action == "give") and blockedItems[itemName] then
-        -- print("Blocked")
         return false
     end
 
     if action == "move" and data.toType == "drop" and blockedItems[itemName] then
-        -- print("Blocked")
+        return false
+    end
+
+    if action == "move" and data.toType == "glovebox" and blockedItems[itemName] then
         return false
     end
 end, {
